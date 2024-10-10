@@ -13,4 +13,6 @@ export default defineNuxtConfig({
   },
 
   css: ['~/designs/styles/index.css'],
+
+  components: ['~/components/core', '~/components/icons'],
 });

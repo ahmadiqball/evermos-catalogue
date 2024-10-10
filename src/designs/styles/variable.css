@@ -1,7 +1,18 @@
 :root {
   --color-blue-100: #d2e0fb;
-  --color-blue-400: #8EACCD;
+  --color-blue-300: #80a4db;
+  --color-blue-400: #8EACCD; 
+  --color-blue-500: #3b5e82;
+  
   --color-yellow-100: #fef9d9;
-  --color-green-300: #dee5d4;
+  --color-yellow-200: #fef3b0;
+  --color-yellow-300: #fdec81; 
+  --color-yellow-400: #fce05c;
+  --color-yellow-500: #f4c300; 
+  
   --color-green-100: rgba(222, 229, 212, 0.5);
+  --color-green-200: #d0e0c2; 
+  --color-green-300: #dee5d4;
+  --color-green-400: #b3c4b6; 
+  --color-green-500: #8ca19e; 
 }
