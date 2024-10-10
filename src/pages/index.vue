@@ -5,13 +5,13 @@ const { data } = await useFetch('/api/products?limit=12&page=1');
 </script>
 
 <template>
-  <div class="product-list">
+  <section class="product-list">
     <CoreProductCard
       v-for="product in data?.products"
       :key="product.id"
       :product="product"
     />
-  </div>
+  </section>
 </template>
 
 <style scoped>

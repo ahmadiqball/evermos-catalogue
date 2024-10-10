@@ -8,7 +8,10 @@ const openMenuDropdown = ref(false);
 <template>
   <div>
     <header class="header">
-      <h3 class="header-logo">Catalogue<span /></h3>
+      <NuxtLink class="header-logo" to="/">
+        Catalogue
+        <span />
+      </NuxtLink>
 
       <div
         class="header-menu"
@@ -51,11 +54,13 @@ main {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .header-logo {
   color: white;
   font-size: 1.5rem;
+  font-weight: 700;
 
   span {
     background-color: var(--color-yellow-100);
@@ -163,6 +168,7 @@ main {
 
   .header-menu-close {
     max-height: 0;
+    overflow: hidden;
     animation: menu-close linear 500ms;
   }
 

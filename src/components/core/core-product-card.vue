@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { Product } from '~/typings/index.entity';
+import { formatPrice } from '~/utils/format-price';
 
 defineProps<{
   product: Product;
@@ -17,7 +18,7 @@ defineProps<{
 
     <div class="product-price-wrapper">
       <p class="product-price">
-        {{ `Rp. ${new Intl.NumberFormat('id-ID').format(product.price)}` }}
+        {{ formatPrice(product.price) }}
       </p>
 
       <span class="product-discount">{{
@@ -26,6 +27,8 @@ defineProps<{
     </div>
 
     <p class="product-description">{{ product.description }}</p>
+
+    <button class="product-button">Add to cart</button>
   </NuxtLink>
 </template>
 
@@ -36,7 +39,7 @@ defineProps<{
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   display: grid;
   grid-template-rows: subgrid;
-  grid-row: span 5;
+  grid-row: span 6;
   row-gap: 8px;
 }
 
@@ -88,6 +91,15 @@ defineProps<{
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
+}
+
+.product-button {
+  background-color: var(--color-blue-300);
+  padding: 8px 4px;
+  font-weight: 500;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
 @media (max-width: 640px) {
