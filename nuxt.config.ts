@@ -11,4 +11,6 @@ export default defineNuxtConfig({
   imports: {
     autoImport: false,
   },
+
+  css: ['~/designs/styles/index.css'],
 });
