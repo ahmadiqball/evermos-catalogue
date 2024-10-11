@@ -1,24 +1,60 @@
 <script setup lang="ts">
 import { useFetch } from '#app';
+import { ref } from 'vue';
 
-const { data } = await useFetch('/api/products?limit=12&page=1');
+const searchInput = ref('');
+const { data } = await useFetch(`/api/products`, {
+  query: {
+    limit: 12,
+    page: 1,
+    search: searchInput,
+  },
+});
 </script>
 
 <template>
-  <section class="product-list">
-    <CoreProductCard
-      v-for="product in data?.products"
-      :key="product.id"
-      :product="product"
-    />
+  <section class="product-page">
+    <div>
+      <input
+        v-model="searchInput"
+        class="product-search"
+        placeholder="Search products..."
+      />
+    </div>
+
+    <div class="product-list">
+      <CoreProductCard
+        v-for="product in data?.products"
+        :key="product.id"
+        :product="product"
+      />
+    </div>
   </section>
 </template>
 
 <style scoped>
+.product-page {
+  margin: 110px 16px;
+}
+
+.product-search {
+  outline: none;
+  border: #d4d4d4 solid 2px;
+  padding: 8px 16px;
+  font-size: 16px;
+  border-radius: 6px;
+  width: 100%;
+  max-width: 400px;
+  transition: ease-in 280ms;
+}
+
+.product-search:focus {
+  border: var(--color-blue-500) solid 2px;
+}
+
 .product-list {
   display: grid;
-  margin: 16px;
-  margin-top: 110px;
+  margin-top: 40px;
   grid-template-columns: repeat(4, 1fr);
   gap: 16px;
 }

@@ -5,12 +5,14 @@ const cartStore = useCartStore();
 </script>
 
 <template>
-  <section class="product-list">
-    <CoreProductCard
-      v-for="product in Array.from(cartStore.wishlist)"
-      :key="product[0]"
-      :product="product[1]"
-    />
+  <section>
+    <div class="product-list">
+      <CoreProductCard
+        v-for="product in Array.from(cartStore.wishlist)"
+        :key="product[0]"
+        :product="product[1]"
+      />
+    </div>
   </section>
 </template>
 
