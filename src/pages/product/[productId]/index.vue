@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { useFetch } from '#app';
+import { showError, useFetch } from '#app';
 import { useHeadSafe } from '#imports';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { useRoute } from 'vue-router';
+import { useCartStore } from '~/store/cart';
 import type { Product } from '~/typings/index.entity';
 import { formatDate } from '~/utils/format-date';
 import { formatPrice } from '~/utils/format-price';
@@ -15,6 +16,19 @@ const productId = useRoute().params.productId;
 
 const { data } = await useFetch<ProductResult>('/api/products/' + productId);
 const tabIndex = ref(1);
+
+const cartStore = useCartStore();
+
+const isProductInCart = computed(() =>
+  Boolean(cartStore.getCartItemByID(productId as string))
+);
+
+if (!data.value) {
+  showError({
+    status: 404,
+    message: 'Product not found',
+  });
+}
 
 useHeadSafe({
   title: data.value?.product.title,
@@ -38,6 +52,15 @@ useHeadSafe({
       <p class="product-stock">
         {{ `Stock: ${data.product.stock} items left` }}
       </p>
+
+      <button
+        class="product-button"
+        :disabled="isProductInCart"
+        :class="{ 'product-button-disabled': isProductInCart }"
+        @click="cartStore.add(data.product)"
+      >
+        {{ isProductInCart ? 'Added to cart' : 'Add to cart' }}
+      </button>
 
       <div class="product-tab">
         <button class="product-tab-button" @click="tabIndex = 1">
@@ -197,6 +220,32 @@ useHeadSafe({
 
 .review-rating {
   font-size: 14px;
+}
+
+.product-button {
+  margin-top: 24px;
+  background-color: var(--color-blue-300);
+  padding: 8px;
+  width: 100%;
+  max-width: 300px;
+  display: flex;
+  justify-content: center;
+  font-weight: 500;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  z-index: 10;
+  transition: ease-in background 280ms;
+  box-shadow:
+    0 4px 6px rgba(0, 0, 0, 0.1),
+    0 6px 12px rgba(0, 0, 0, 0.15),
+    0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+.product-button-disabled {
+  background-color: grey;
+  pointer-events: none;
 }
 
 @media (max-width: 768px) {

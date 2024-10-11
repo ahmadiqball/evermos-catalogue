@@ -157,6 +157,7 @@ function wishlistHandler(event: Event) {
 
 .product-button-disabled {
   background-color: grey;
+  pointer-events: none;
 }
 
 @media (max-width: 640px) {
