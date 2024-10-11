@@ -17,9 +17,12 @@ const openMenuDropdown = ref(false);
         class="header-menu"
         :class="openMenuDropdown ? 'header-menu-open' : 'header-menu-close'"
       >
-        <NuxtLink to="/">Products</NuxtLink>
-        <NuxtLink to="/cart">Cart</NuxtLink>
-        <NuxtLink to="/wishlist">My Wishlist</NuxtLink>
+        <NuxtLink to="/" class="header-link">Products</NuxtLink>
+        <NuxtLink to="/wishlist" class="header-link">My Wishlist</NuxtLink>
+        <NuxtLink to="/cart" class="header-cart">
+          <IconCart class="header-cart-icon" />
+          <span>Cart</span>
+        </NuxtLink>
       </div>
 
       <button
@@ -78,19 +81,40 @@ main {
   display: flex;
   align-items: center;
   gap: 12px;
+}
 
-  a {
-    text-decoration: none;
-    color: white;
-    font-size: 16px;
-    padding: 4px 6px;
-    border-radius: 4px;
-    transition: linear background-color 100ms;
-  }
+.header-link {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  padding: 4px 6px;
+  border-radius: 4px;
+  transition: linear background-color 140ms;
+}
 
-  a:hover {
-    background-color: var(--color-green-100);
-  }
+.header-link:hover {
+  background-color: var(--color-green-100);
+}
+
+.header-cart {
+  background-color: var(--color-yellow-100);
+  color: black;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 20px;
+  border-radius: 999px;
+  font-weight: 700;
+  transition: linear background 200ms;
+}
+
+.header-cart-icon {
+  width: 24px;
+}
+
+.header-cart:hover {
+  background-color: var(--color-yellow-300);
 }
 
 .header-button {
@@ -154,13 +178,25 @@ main {
     border-radius: 16px;
     flex-flow: column;
     gap: 0px;
+    padding-top: 10px;
+  }
 
-    a {
-      width: 100%;
-      text-align: center;
-      padding: 12px 0;
-      font-size: 12px;
-    }
+  .header-link {
+    width: calc(100% - 20px);
+    text-align: center;
+    padding: 12px 0;
+    font-size: 14px;
+  }
+
+  .header-cart {
+    width: calc(100% - 20px);
+    margin: 10px;
+    font-size: 14px;
+    max-width: 250px;
+  }
+
+  .header-cart-icon {
+    width: 20px;
   }
 
   .header-menu-open {
