@@ -17,13 +17,19 @@ const tabIndex = ref(1);
 </script>
 
 <template>
-  <section v-if="data" class="product-container">
+  <section v-if="data" class="product-container container">
     <img :src="data.product.images[0]" class="product-image" />
     <div>
-      <CoreCategoryBadge :category="data.product.category" />
-      <h2>{{ data?.product.title }}</h2>
-      <h3>{{ formatPrice(data.product.price) }}</h3>
-      <p>{{ data.product.rating }}</p>
+      <div class="flex-between">
+        <CoreCategoryBadge :category="data.product.category" />
+        <div class="product-rating">
+          <IconStarFilled />
+          <p>{{ data.product.rating.toFixed(1) }}</p>
+        </div>
+      </div>
+
+      <h2 class="product-title">{{ data?.product.title }}</h2>
+      <h3 class="product-price">{{ formatPrice(data.product.price) }}</h3>
       <p>{{ `Stock: ${data.product.stock} items left` }}</p>
 
       <div class="product-tab">
@@ -59,12 +65,41 @@ const tabIndex = ref(1);
 <style scoped>
 .product-container {
   display: grid;
+  margin-top: 110px;
   grid-template-columns: repeat(2, 1fr);
   gap: 80px;
 }
 
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.product-rating {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+
+  svg {
+    color: rgb(239, 203, 22);
+    height: 20px;
+  }
+}
+
 .product-image {
   width: 100%;
+}
+
+.product-title {
+  font-size: 42px;
+  font-weight: 700;
+  margin-top: 14px;
+}
+
+.product-price {
+  margin-top: 16px;
+  font-size: 24px;
 }
 
 .product-tab {

@@ -18,6 +18,13 @@ button {
   border: none;
 }
 
+.container {
+  padding: 0 16px;
+  margin: 0 auto;
+  max-width: 1440px;
+}
+
+
 .custom-scrollbar::-webkit-scrollbar {
   width: 8px;
   background-color: transparent;

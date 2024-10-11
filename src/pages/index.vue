@@ -13,7 +13,7 @@ const { data } = await useFetch(`/api/products`, {
 </script>
 
 <template>
-  <section class="product-page">
+  <section class="product-page container">
     <div>
       <input
         v-model="searchInput"
@@ -34,7 +34,7 @@ const { data } = await useFetch(`/api/products`, {
 
 <style scoped>
 .product-page {
-  margin: 110px 16px;
+  margin-top: 110px;
 }
 
 .product-search {

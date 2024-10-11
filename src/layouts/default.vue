@@ -14,32 +14,34 @@ const totalItemInCart = computed(() =>
 
 <template>
   <div>
-    <header class="header">
-      <NuxtLink class="header-logo" to="/">
-        Catalogue
-        <span />
-      </NuxtLink>
-
-      <div
-        class="header-menu"
-        :class="openMenuDropdown ? 'header-menu-open' : 'header-menu-close'"
-      >
-        <NuxtLink to="/" class="header-link">Products</NuxtLink>
-        <NuxtLink to="/wishlist" class="header-link">My Wishlist</NuxtLink>
-        <NuxtLink to="/cart" class="header-cart">
-          <IconCart class="header-cart-icon" />
-          <span>Cart</span>
-          <span class="header-cart-count"> {{ totalItemInCart }}</span>
+    <header class="header-wrapper container">
+      <div class="header">
+        <NuxtLink class="header-logo" to="/">
+          Catalogue
+          <span />
         </NuxtLink>
-      </div>
 
-      <button
-        class="header-button"
-        :class="{ 'header-button-open': openMenuDropdown }"
-        @click="openMenuDropdown = !openMenuDropdown"
-      >
-        <span v-for="item in 3" :key="item" />
-      </button>
+        <div
+          class="header-menu"
+          :class="openMenuDropdown ? 'header-menu-open' : 'header-menu-close'"
+        >
+          <NuxtLink to="/" class="header-link">Products</NuxtLink>
+          <NuxtLink to="/wishlist" class="header-link">My Wishlist</NuxtLink>
+          <NuxtLink to="/cart" class="header-cart">
+            <IconCart class="header-cart-icon" />
+            <span>Cart</span>
+            <span class="header-cart-count"> {{ totalItemInCart }}</span>
+          </NuxtLink>
+        </div>
+
+        <button
+          class="header-button"
+          :class="{ 'header-button-open': openMenuDropdown }"
+          @click="openMenuDropdown = !openMenuDropdown"
+        >
+          <span v-for="item in 3" :key="item" />
+        </button>
+      </div>
     </header>
     <main>
       <NuxtPage />
@@ -52,16 +54,21 @@ main {
   margin-top: 74px;
 }
 
-.header {
+.header-wrapper {
   position: fixed;
   top: 0;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
   z-index: 50;
+}
+
+.header {
+  margin-top: 10px;
   background-color: var(--color-blue-400);
-  width: calc(100% - 20px);
+  width: 100%;
   padding: 1rem 3rem;
   border-radius: 9999px;
-  margin: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -187,9 +194,10 @@ main {
     max-height: 0;
     position: absolute;
     top: 100%;
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%);
     background-color: var(--color-blue-400);
-    width: 100%;
+    width: calc(100% - 32px);
     margin-top: 10px;
     border-radius: 16px;
     flex-flow: column;
@@ -222,8 +230,10 @@ main {
 
   .header-menu-close {
     max-height: 0;
+    height: 0;
     overflow: hidden;
     animation: menu-close linear 500ms;
+    padding-top: 0;
   }
 
   .header-button {
@@ -245,7 +255,7 @@ main {
   @keyframes menu-close {
     0% {
       max-height: 100vh;
-      overflow: visible;
+      overflow: hidden;
     }
 
     100% {
