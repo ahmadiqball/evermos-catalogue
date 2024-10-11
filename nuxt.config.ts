@@ -15,4 +15,16 @@ export default defineNuxtConfig({
   css: ['~/designs/styles/index.css'],
 
   components: ['~/components/core', '~/components/icons'],
+
+  app: {
+    head: {
+      title: 'Catalogue',
+
+      templateParams: {
+        separator: '|',
+      },
+
+      titleTemplate: 'Catalogue %separator %s',
+    },
+  },
 });

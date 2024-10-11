@@ -1,7 +1,12 @@
 <script setup lang="ts">
+import { useHeadSafe } from '#imports';
 import { useCartStore } from '~/store/cart';
 
 const cartStore = useCartStore();
+
+useHeadSafe({
+  title: 'Wishlist',
+});
 </script>
 
 <template>

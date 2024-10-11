@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useFetch } from '#app';
+import { useHeadSafe } from '#imports';
 import { ref } from 'vue';
 import { useRoute } from 'vue-router';
 import type { Product } from '~/typings/index.entity';
@@ -14,6 +15,10 @@ const productId = useRoute().params.productId;
 
 const { data } = await useFetch<ProductResult>('/api/products/' + productId);
 const tabIndex = ref(1);
+
+useHeadSafe({
+  title: data.value?.product.title,
+});
 </script>
 
 <template>

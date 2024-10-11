@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useFetch } from '#app';
+import { useHeadSafe } from '#imports';
 import { ref } from 'vue';
 
 const searchInput = ref('');
@@ -10,11 +11,15 @@ const { data } = await useFetch(`/api/products`, {
     search: searchInput,
   },
 });
+
+useHeadSafe({
+  title: 'Products',
+});
 </script>
 
 <template>
   <section class="product-page container">
-    <div>
+    <div class="product-search-wrapper">
       <input
         v-model="searchInput"
         class="product-search"
@@ -35,6 +40,11 @@ const { data } = await useFetch(`/api/products`, {
 <style scoped>
 .product-page {
   margin-top: 110px;
+}
+
+.product-search-wrapper {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .product-search {

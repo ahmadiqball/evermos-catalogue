@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, formatPrice } from '#imports';
+import { computed, formatPrice, useHeadSafe } from '#imports';
 import { useCartStore } from '~/store/cart';
 
 const cartStore = useCartStore();
@@ -10,6 +10,10 @@ const totalCartPrice = computed(() =>
     0
   )
 );
+
+useHeadSafe({
+  title: 'Cart',
+});
 </script>
 
 <template>
