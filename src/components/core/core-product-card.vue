@@ -10,9 +10,8 @@ defineProps<{
 <template>
   <NuxtLink class="product-card" :to="`/product/${product.id}`">
     <img :src="product.images[0]" class="product-image" />
-    <span class="product-category">
-      {{ product.category }}
-    </span>
+
+    <CoreCategoryBadge :category="product.category" />
 
     <h6 class="product-title">{{ product.title }}</h6>
 
@@ -36,7 +35,7 @@ defineProps<{
 .product-card {
   border-radius: 16px;
   padding: 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
   display: grid;
   grid-template-rows: subgrid;
   grid-row: span 6;
@@ -48,16 +47,6 @@ defineProps<{
   height: 150px;
   margin: 0 auto;
   display: block;
-}
-
-.product-category {
-  text-transform: capitalize;
-  font-size: 12px;
-  border-radius: 4px;
-  background-color: var(--color-blue-400);
-  padding: 4px 6px;
-  color: white;
-  width: fit-content;
 }
 
 .product-title {
@@ -94,12 +83,17 @@ defineProps<{
 }
 
 .product-button {
+  margin-top: 8px;
   background-color: var(--color-blue-300);
   padding: 8px 4px;
   font-weight: 500;
   color: white;
   border-radius: 6px;
   cursor: pointer;
+  box-shadow:
+    0 4px 6px rgba(0, 0, 0, 0.1),
+    0 6px 12px rgba(0, 0, 0, 0.15),
+    0 12px 24px rgba(0, 0, 0, 0.1);
 }
 
 @media (max-width: 640px) {

@@ -17,14 +17,14 @@ const tabIndex = ref(1);
 </script>
 
 <template>
-  <section class="product-container">
-    <img :src="data?.product.images[0]" class="product-image" />
+  <section v-if="data" class="product-container">
+    <img :src="data.product.images[0]" class="product-image" />
     <div>
-      <span>{{ data?.product.category }}</span>
+      <CoreCategoryBadge :category="data.product.category" />
       <h2>{{ data?.product.title }}</h2>
-      <h3>{{ formatPrice(data?.product.price) }}</h3>
-      <p>{{ data?.product.rating }}</p>
-      <p>{{ `Stock: ${data?.product.stock} items left` }}</p>
+      <h3>{{ formatPrice(data.product.price) }}</h3>
+      <p>{{ data.product.rating }}</p>
+      <p>{{ `Stock: ${data.product.stock} items left` }}</p>
 
       <div class="product-tab">
         <button class="product-tab-button" @click="tabIndex = 1">
@@ -37,12 +37,12 @@ const tabIndex = ref(1);
       </div>
 
       <div v-if="tabIndex === 1">
-        {{ data?.product.description }}
+        {{ data.product.description }}
       </div>
 
       <div v-if="tabIndex === 2">
         <div
-          v-for="review in data?.product.reviews"
+          v-for="review in data.product.reviews"
           :key="`${review.date}-${review.reviewerName}`"
         >
           <p>{{ review.reviewerName }}</p>

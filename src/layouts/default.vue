@@ -54,12 +54,14 @@ main {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  box-shadow:
+    0 6px 24px rgba(0, 0, 0, 0.3),
+    inset 0 -4px 20px rgba(74, 144, 226, 0.3);
 }
 
 .header-logo {
   color: white;
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   font-weight: 700;
 
   span {
@@ -80,7 +82,7 @@ main {
   a {
     text-decoration: none;
     color: white;
-    font-size: 14px;
+    font-size: 16px;
     padding: 4px 6px;
     border-radius: 4px;
     transition: linear background-color 100ms;
