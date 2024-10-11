@@ -107,6 +107,7 @@ main {
   border-radius: 999px;
   font-weight: 700;
   transition: linear background 200ms;
+  margin-left: 20px;
 }
 
 .header-cart-icon {

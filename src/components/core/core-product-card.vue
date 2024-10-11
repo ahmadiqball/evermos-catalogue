@@ -1,14 +1,28 @@
 <script setup lang="ts">
+import { computed } from 'vue';
+import { useCartStore } from '~/store/cart';
 import type { Product } from '~/typings/index.entity';
 import { formatPrice } from '~/utils/format-price';
 
-defineProps<{
+const props = defineProps<{
   product: Product;
 }>();
+
+const cartStore = useCartStore();
+
+const isProductInCart = computed(() =>
+  Boolean(cartStore.getCartItemByID(props.product.id))
+);
+
+function addToCart(event: Event) {
+  event.preventDefault();
+
+  cartStore.add(props.product);
+}
 </script>
 
 <template>
-  <NuxtLink class="product-card" :to="`/product/${product.id}`">
+  <a class="product-card" :href="`/product/${product.id}`">
     <img :src="product.images[0]" class="product-image" />
 
     <CoreCategoryBadge :category="product.category" />
@@ -27,8 +41,15 @@ defineProps<{
 
     <p class="product-description">{{ product.description }}</p>
 
-    <button class="product-button">Add to cart</button>
-  </NuxtLink>
+    <button
+      class="product-button"
+      :disabled="isProductInCart"
+      :class="{ 'product-button-disabled': isProductInCart }"
+      @click="addToCart"
+    >
+      {{ isProductInCart ? 'Added to cart' : 'Add to cart' }}
+    </button>
+  </a>
 </template>
 
 <style scoped>
@@ -90,10 +111,17 @@ defineProps<{
   color: white;
   border-radius: 6px;
   cursor: pointer;
+  position: relative;
+  z-index: 10;
+  transition: ease-in background 280ms;
   box-shadow:
     0 4px 6px rgba(0, 0, 0, 0.1),
     0 6px 12px rgba(0, 0, 0, 0.15),
     0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+.product-button-disabled {
+  background-color: grey;
 }
 
 @media (max-width: 640px) {

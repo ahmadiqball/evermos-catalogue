@@ -12,9 +12,9 @@
     "prepare": "simple-git-hooks"
   },
   "dependencies": {
+    "@pinia/nuxt": "^0.5.5",
     "lint-staged": "^15.2.10",
     "nuxt": "^3.13.0",
-    "pinia": "^2.2.4",
     "simple-git-hooks": "^2.11.1",
     "vue": "latest",
     "vue-router": "latest"

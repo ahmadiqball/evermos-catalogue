@@ -6,7 +6,7 @@ export default defineNuxtConfig({
 
   srcDir: 'src/',
 
-  modules: ['@nuxt/eslint'],
+  modules: ['@nuxt/eslint', '@pinia/nuxt'],
 
   imports: {
     autoImport: false,
