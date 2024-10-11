@@ -22,7 +22,7 @@ function addToCart(event: Event) {
 </script>
 
 <template>
-  <a class="product-card" :href="`/product/${product.id}`">
+  <NuxtLink class="product-card" :to="`/product/${product.id}`">
     <img :src="product.images[0]" class="product-image" />
 
     <CoreCategoryBadge :category="product.category" />
@@ -49,7 +49,7 @@ function addToCart(event: Event) {
     >
       {{ isProductInCart ? 'Added to cart' : 'Add to cart' }}
     </button>
-  </a>
+  </NuxtLink>
 </template>
 
 <style scoped>

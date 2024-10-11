@@ -21,19 +21,30 @@ const totalCartPrice = computed(() =>
           :key="product.data.id"
           class="cart-product"
         >
-          <img :src="product.data.images[0]" class="product-image" />
-          <div class="product-title-wrapper">
+          <NuxtLink :to="`/product/${product.data.id}`">
+            <img :src="product.data.images[0]" class="product-image" />
+          </NuxtLink>
+
+          <NuxtLink
+            :to="`/product/${product.data.id}`"
+            class="product-title-wrapper"
+          >
             <CoreCategoryBadge :category="product.data.category" />
             <h6 class="product-title">{{ product.data.title }}</h6>
-          </div>
+          </NuxtLink>
 
-          <p class="product-quantity">{{ product.quantity }}</p>
+          <CoreCartMutation :product="product" />
 
           <p class="product-price">
             {{ formatPrice(product.quantity * product.data.price) }}
           </p>
 
-          <button>delete</button>
+          <button
+            class="product-delete"
+            @click="cartStore.remove(product.data.id)"
+          >
+            <IconTrashCan />
+          </button>
         </div>
       </div>
 
@@ -101,6 +112,20 @@ const totalCartPrice = computed(() =>
 
 .product-price {
   text-align: center;
+}
+
+.product-delete {
+  color: rgba(205, 42, 85, 0.6);
+  cursor: pointer;
+  transition: ease-in color 200ms;
+
+  svg {
+    height: 20px;
+  }
+}
+
+.product-delete:hover {
+  color: rgba(205, 42, 85, 1);
 }
 
 .cart-footer {
