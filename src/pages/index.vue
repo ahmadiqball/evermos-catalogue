@@ -18,6 +18,7 @@ const { data } = await useFetch('/api/products?limit=12&page=1');
 .product-list {
   display: grid;
   margin: 16px;
+  margin-top: 110px;
   grid-template-columns: repeat(4, 1fr);
   gap: 16px;
 }

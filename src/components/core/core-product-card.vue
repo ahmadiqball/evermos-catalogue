@@ -14,10 +14,24 @@ const isProductInCart = computed(() =>
   Boolean(cartStore.getCartItemByID(props.product.id))
 );
 
+const isProductInWishlist = computed(() =>
+  cartStore.wishlist.has(props.product.id)
+);
+
 function addToCart(event: Event) {
   event.preventDefault();
 
   cartStore.add(props.product);
+}
+
+function wishlistHandler(event: Event) {
+  event.preventDefault();
+
+  if (isProductInWishlist.value) {
+    cartStore.unlike(props.product.id);
+  } else {
+    cartStore.like(props.product);
+  }
 }
 </script>
 
@@ -49,11 +63,21 @@ function addToCart(event: Event) {
     >
       {{ isProductInCart ? 'Added to cart' : 'Add to cart' }}
     </button>
+
+    <button
+      class="product-like"
+      :style="{ color: `${isProductInWishlist ? '#eb4a4a' : 'grey'}` }"
+      @click="wishlistHandler"
+    >
+      <IconHeartFilled v-if="isProductInWishlist" />
+      <IconHeart v-else />
+    </button>
   </NuxtLink>
 </template>
 
 <style scoped>
 .product-card {
+  position: relative;
   border-radius: 16px;
   padding: 16px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
@@ -61,6 +85,17 @@ function addToCart(event: Event) {
   grid-template-rows: subgrid;
   grid-row: span 6;
   row-gap: 8px;
+}
+
+.product-like {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  cursor: pointer;
+
+  svg {
+    height: 24px;
+  }
 }
 
 .product-image {

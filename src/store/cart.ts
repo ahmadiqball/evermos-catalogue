@@ -9,6 +9,7 @@ interface CartProductItem {
 export const useCartStore = defineStore('cart', {
   state: () => ({
     products: [] as Array<CartProductItem>,
+    wishlist: new Map<string, Product>(),
   }),
   actions: {
     add(product: Product) {
@@ -43,6 +44,12 @@ export const useCartStore = defineStore('cart', {
     },
     remove(id: string) {
       this.products = this.products.filter((product) => product.data.id !== id);
+    },
+    like(product: Product) {
+      this.wishlist.set(product.id, product);
+    },
+    unlike(id: string) {
+      this.wishlist.delete(id);
     },
   },
   getters: {
