@@ -1,8 +1,15 @@
 <script setup lang="ts">
 import { NuxtPage } from '#components';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
+import { useCartStore } from '~/store/cart';
 
 const openMenuDropdown = ref(false);
+
+const cartStore = useCartStore();
+
+const totalItemInCart = computed(() =>
+  cartStore.products.reduce((acc, val) => (acc += val.quantity), 0)
+);
 </script>
 
 <template>
@@ -22,6 +29,7 @@ const openMenuDropdown = ref(false);
         <NuxtLink to="/cart" class="header-cart">
           <IconCart class="header-cart-icon" />
           <span>Cart</span>
+          <span class="header-cart-count"> {{ totalItemInCart }}</span>
         </NuxtLink>
       </div>
 
@@ -100,10 +108,10 @@ main {
   background-color: var(--color-yellow-100);
   color: black;
   display: flex;
-  gap: 8px;
+  gap: 12px;
   align-items: center;
   justify-content: center;
-  padding: 6px 20px;
+  padding: 8px 20px;
   border-radius: 999px;
   font-weight: 700;
   transition: linear background 200ms;
@@ -112,6 +120,13 @@ main {
 
 .header-cart-icon {
   width: 24px;
+}
+
+.header-cart-count {
+  font-size: 12px;
+  background-color: var(--color-green-400);
+  padding: 2px 10px;
+  border-radius: 999px;
 }
 
 .header-cart:hover {
